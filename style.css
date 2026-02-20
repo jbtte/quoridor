@@ -45,8 +45,8 @@ body {
 
     width: 95vw;
     height: 95vw;
-    background-color: #8B7355; /* grade visível como madeira escura */
-    border: 2px solid #5a4a35;
+    background-color: #b0b0b0; /* grade cinza neutra */
+    border: 2px solid #888;
     gap: 0;
 }
 
@@ -63,7 +63,7 @@ body {
 
 /* Estado Ativo da Barreira */
 .wall-active {
-    background-color: #D4500A !important;
+    background-color: #FF6600 !important;
 }
 
 .wall-preview {
