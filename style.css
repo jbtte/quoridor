@@ -1,0 +1,186 @@
+/* Reset básico para mobile */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica;
+}
+
+#game-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#status {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    font-size: 0.9rem;
+    margin: 0 5px;
+}
+
+.blue-badge { background-color: blue; }
+.green-badge { background-color: green; }
+
+/* Tabuleiro */
+#board {
+    display: grid;
+    /* 9 colunas de 1fr e 8 colunas de barreira com 4px fixos */
+    grid-template-columns: repeat(8, 1fr 4px) 1fr;
+    grid-template-rows: repeat(8, 1fr 4px) 1fr;
+    
+    width: 95vw;
+    height: 95vw;
+    background-color: #000; /* Esta cor será o nosso grid */
+    border: 2px solid #000;
+    gap: 0; /* O grid-template já cuida do espaçamento */
+}
+
+.cell {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;border: 0.1px solid #eeeeee; /* Uma linha bem sutil para guiar os olhos */
+}
+
+
+.wall-space {
+    background-color: #fff;
+}
+
+/* Estado Ativo da Barreira */
+.wall-active {
+    background-color: red !important;
+}
+
+.wall-preview {
+    background-color: #ffcccc;
+}
+
+/* Peças */
+.piece {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.blue { background-color: blue; }
+.green { background-color: green; }
+
+/* Controles */
+#controls {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 95vw;
+}
+
+button {
+    padding: 15px;
+    border: 2px solid #000;
+    background: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button.active {
+    background-color: #000;
+    color: #fff;
+}
+
+#btn-undo {
+    grid-column: span 2;
+    background-color: #f0f0f0;
+}
+
+/* Muda o cursor ou a cor de fundo levemente dependendo do modo */
+body.mode-wall .cell {
+    cursor: not-allowed;
+}
+
+body.mode-move .wall-space {
+    pointer-events: none; /* Desativa cliques nos vãos quando em modo mover */
+}
+
+/* Linhas de saída de cada jogador */
+[data-r="16"].cell { background-color: #ddeeff; } /* saída do Azul  (base) */
+[data-r="0"].cell  { background-color: #ddf0dd; } /* saída do Verde (topo) */
+
+/* Toast */
+#toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(0, 0, 0, 0.82);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+    z-index: 50;
+    white-space: nowrap;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Tela de vitória */
+#winner-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+#winner-overlay.show {
+    display: flex;
+}
+
+#winner-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 50px;
+    text-align: center;
+    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes pop-in {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+#winner-trophy {
+    font-size: 3.5rem;
+    margin-bottom: 8px;
+}
+
+#winner-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Quoridor Online</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game-header">
+      <div id="status">Vez do Azul</div>
+      <div id="barrier-stats">
+        <span class="badge blue-badge">Azul: <span id="b1">10</span></span>
+        <span class="badge green-badge">Verde: <span id="b2">10</span></span>
+      </div>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="controls">
+      <button id="btn-move" class="btn-toggle active" onclick="setMode('move')">
+        Mover Peça
+      </button>
+      <button id="btn-wall" class="btn-toggle" onclick="setMode('wall')">
+        Colocar Barreira
+      </button>
+      <button id="btn-undo" onclick="undo()">Voltar Vez</button>
+    </div>
+
+    <div id="toast"></div>
+
+    <div id="winner-overlay">
+      <div id="winner-card">
+        <div id="winner-trophy">🏆</div>
+        <div id="winner-text"></div>
+        <button onclick="resetGame()">Jogar Novamente</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
