@@ -42,24 +42,23 @@ body {
     /* 9 colunas de 1fr e 8 colunas de barreira com 4px fixos */
     grid-template-columns: repeat(8, 1fr 4px) 1fr;
     grid-template-rows: repeat(8, 1fr 4px) 1fr;
-    
+
     width: 95vw;
     height: 95vw;
-    background-color: #000; /* Esta cor será o nosso grid */
-    border: 2px solid #000;
-    gap: 0; /* O grid-template já cuida do espaçamento */
+    background-color: #8B7355; /* grade visível como madeira escura */
+    border: 2px solid #5a4a35;
+    gap: 0;
 }
 
 .cell {
-    background-color: #fff;
+    background-color: #F5DEB3; /* trigo — madeira clara */
     display: flex;
     justify-content: center;
-    align-items: center;border: 0.1px solid #eeeeee; /* Uma linha bem sutil para guiar os olhos */
+    align-items: center;
 }
 
-
 .wall-space {
-    background-color: #fff;
+    background-color: transparent; /* deixa a grade do board aparecer */
 }
 
 /* Estado Ativo da Barreira */
