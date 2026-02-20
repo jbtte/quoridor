@@ -40,8 +40,8 @@ body {
 #board {
     display: grid;
     /* 9 colunas de 1fr e 8 colunas de barreira com 4px fixos */
-    grid-template-columns: repeat(8, 1fr 4px) 1fr;
-    grid-template-rows: repeat(8, 1fr 4px) 1fr;
+    grid-template-columns: repeat(8, 1fr 6px) 1fr;
+    grid-template-rows: repeat(8, 1fr 6px) 1fr;
 
     width: 95vw;
     height: 95vw;
@@ -63,7 +63,7 @@ body {
 
 /* Estado Ativo da Barreira */
 .wall-active {
-    background-color: red !important;
+    background-color: #D4500A !important;
 }
 
 .wall-preview {
