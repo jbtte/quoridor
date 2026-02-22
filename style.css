@@ -50,15 +50,20 @@ body {
 /* Tabuleiro */
 #board {
     display: grid;
-    /* 9 colunas de 1fr e 8 colunas de barreira com 4px fixos */
     grid-template-columns: repeat(8, 1fr 6px) 1fr;
     grid-template-rows: repeat(8, 1fr 6px) 1fr;
+    transition: grid-template-columns 0.2s ease, grid-template-rows 0.2s ease;
 
     width: 95vw;
     height: 95vw;
     background-color: #b0b0b0; /* grade cinza neutra */
     border: 2px solid #888;
     gap: 0;
+}
+
+body.mode-wall #board {
+    grid-template-columns: repeat(8, 1fr 14px) 1fr;
+    grid-template-rows: repeat(8, 1fr 14px) 1fr;
 }
 
 .cell {
@@ -70,15 +75,22 @@ body {
 
 .wall-space {
     background-color: transparent; /* deixa a grade do board aparecer */
+    transition: background-color 0.15s ease;
 }
 
-/* Estado Ativo da Barreira */
+/* Slots visíveis no modo barreira */
+body.mode-wall .wall-space {
+    background-color: rgba(255, 200, 80, 0.4);
+}
+
+/* Preview ao passar o mouse (3 segmentos da barreira) */
+.wall-preview {
+    background-color: rgba(255, 130, 0, 0.7) !important;
+}
+
+/* Estado Ativo da Barreira (colocada) */
 .wall-active {
     background-color: #FF6600 !important;
-}
-
-.wall-preview {
-    background-color: #ffcccc;
 }
 
 /* Peças */

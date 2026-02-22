@@ -21,6 +21,8 @@ function initBoard() {
       } else {
         div.classList.add('wall-space');
         div.onclick = () => handleWallClick(r, c);
+        div.addEventListener('mouseenter', () => showWallPreview(r, c));
+        div.addEventListener('mouseleave', clearWallPreview);
       }
       board.appendChild(div);
     }
@@ -31,6 +33,7 @@ function initBoard() {
 function renderState() {
   document.querySelectorAll('.piece').forEach((p) => p.remove());
   document.querySelectorAll('.wall-active').forEach((w) => w.classList.remove('wall-active'));
+  clearWallPreview();
 
   const c1 = document.querySelector(`[data-r="${pos.p1.r * 2}"][data-c="${pos.p1.c * 2}"]`);
   const c2 = document.querySelector(`[data-r="${pos.p2.r * 2}"][data-c="${pos.p2.c * 2}"]`);
@@ -129,6 +132,33 @@ function isPathBlocked(r1, c1, r2, c2) {
   const wallR = r1 * 2 + (r2 - r1);
   const wallC = c1 * 2 + (c2 - c1);
   return placedWalls.some((w) => w.r === wallR && w.c === wallC);
+}
+
+// --- PREVIEW DE BARREIRAS ---
+
+function getWallSegments(r, c) {
+  if (r % 2 !== 0 && c % 2 === 0) {
+    if (c + 2 > 16) return null;
+    return [{ r, c }, { r, c: c + 1 }, { r, c: c + 2 }];
+  } else if (r % 2 === 0 && c % 2 !== 0) {
+    if (r + 2 > 16) return null;
+    return [{ r, c }, { r: r + 1, c }, { r: r + 2, c }];
+  }
+  return null;
+}
+
+function showWallPreview(r, c) {
+  if (mode !== 'wall') return;
+  const segs = getWallSegments(r, c);
+  if (!segs) return;
+  segs.forEach(({ r, c }) => {
+    const el = document.querySelector(`[data-r="${r}"][data-c="${c}"]`);
+    if (el) el.classList.add('wall-preview');
+  });
+}
+
+function clearWallPreview() {
+  document.querySelectorAll('.wall-preview').forEach((el) => el.classList.remove('wall-preview'));
 }
 
 // --- LÓGICA DE BARREIRAS ---
