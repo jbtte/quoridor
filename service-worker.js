@@ -1,10 +1,11 @@
-const CACHE_NAME = 'quoridor-v1';
+const CACHE_NAME = 'quoridor-v2';
 const ASSETS = [
   './index.html',
   './style.css',
   './script.js',
   './manifest.json',
-  './icon.png',
+  './icons/icon.png',
+  './icons/icon-192.png',
 ];
 
 self.addEventListener('install', (e) => {

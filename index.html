@@ -8,7 +8,7 @@
     />
     <title>Quoridor Online</title>
     <link rel="manifest" href="manifest.json" />
-    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="apple-touch-icon" href="icons/icon.png" />
     <meta name="theme-color" content="#000000" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,6 +38,7 @@
     </div>
 
     <div id="toast"></div>
+    <button id="btn-install" style="display:none" onclick="installPWA()">⬇ Instalar App</button>
 
     <div id="winner-overlay">
       <div id="winner-card">
@@ -52,6 +53,27 @@
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js');
       }
+
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('btn-install').style.display = 'inline-block';
+      });
+
+      function installPWA() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+          document.getElementById('btn-install').style.display = 'none';
+        });
+      }
+
+      window.addEventListener('appinstalled', () => {
+        document.getElementById('btn-install').style.display = 'none';
+        deferredPrompt = null;
+      });
     </script>
   </body>
 </html>
